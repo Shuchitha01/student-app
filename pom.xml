@@ -5,7 +5,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>StudentManagementApp</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
 
     <!-- Ensure packaging is set to war -->
     <packaging>war</packaging>
