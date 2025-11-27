@@ -1,0 +1,3 @@
+@Library('shared-library') _
+
+reusablePipeline('https://github.com/devops5014/student-app.git', 'github-pass')
