@@ -1,0 +1,40 @@
+pipeline {
+    agent { label "QA-server" }
+    stages {
+        stage ('checkout') {
+            steps {
+                checkout([
+                    $class:'GitSCM'
+                    branches: [(name: '*/main')],
+                    userRemoteConfigs: [
+                        url:'https://github.com/Shuchitha01/student-app.git',
+                        credentialsId: 'github_pass'
+                    ]
+                ])
+            }
+
+        }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn clean install'
+ 
+            }
+        }
+
+        stage ('Test') {
+            steps {
+                sh "mvn test"
+            }
+        }
+
+        stage ('Deploy to Artifactory') {
+            steps {
+                configFileProvider([congifFile(fileID:"9e898577-98ab-4a24-a8b1-b4d94c62d453",variable: "MAVEN_SETTINGS")]){
+                sh 'mvn deploy -s $MAVEN_SETTINGS'
+                }
+              
+            }
+        } 
+    }
+}
