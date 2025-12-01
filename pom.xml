@@ -60,7 +60,7 @@
         <!-- SNAPSHOTS go here -->
         <snapshotRepository>
             <id>libs-snapshot-local</id>
-            <url>//http://3.110.151.172:8081/artifactory/libs-snapshot-local</url>
+            <url>http://3.110.151.172:8081/artifactory/libs-snapshot-local</url>
         </snapshotRepository>
 
     </distributionManagement>
