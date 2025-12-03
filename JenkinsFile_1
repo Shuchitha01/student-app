@@ -1,2 +1,2 @@
 @Library('Shared-Library') _
-reusable_pepeline_script('https://github.com/Shuchitha01/student-app.git' , 'github_pass')
+reusable_pipeline_script('https://github.com/Shuchitha01/student-app.git' , 'github_pass')
