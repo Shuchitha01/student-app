@@ -8,12 +8,6 @@ pipeline {
 
     stages {
 
-        stage('Git Clone') {
-            steps {
-                git 'https://github.com/Shuchitha01/student-app.git'
-            }
-        }
-
         stage('Build WAR') {
             steps {
                 sh 'mvn clean package'
@@ -22,10 +16,18 @@ pipeline {
 
         stage('Deploy WAR to JFrog') {
             steps {
-                sh """
-                mvn deploy \
-                -DaltDeploymentRepository=jfrog::default::${JFROG_URL}/${JFROG_REPO}
-                """
+                withCredentials([usernamePassword(
+                    credentialsId: 'jfrog-creds',
+                    usernameVariable: 'JF_USER',
+                    passwordVariable: 'JF_PASS'
+                )]) {
+                    sh """
+                    mvn deploy -DskipTests \
+                    -DaltDeploymentRepository=${JFROG_REPO}::default::${JFROG_URL}/${JFROG_REPO} \
+                    -Dusername=$JF_USER \
+                    -Dpassword=$JF_PASS
+                    """
+                }
             }
         }
 
