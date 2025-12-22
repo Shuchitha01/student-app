@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'
-    }
-
     environment {
         JFROG_URL  = "http://65.1.146.55:8082/artifactory"
         JFROG_REPO = "libs-snapshot-local"
