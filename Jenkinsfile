@@ -13,6 +13,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
+                  git branch: 'main',
                 git 'https://github.com/Shuchitha01/student-app.git'
             }
         }
