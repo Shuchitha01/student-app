@@ -105,13 +105,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        success {
-            echo "✅ Checkout → WAR → JFrog → Docker → ECR → Container completed successfully"
-        }
-        failure {
-            echo "❌ Pipeline failed. Check logs."
-        }
-    }
 }
