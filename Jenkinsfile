@@ -91,7 +91,7 @@ pipeline {
                 docker rm -f student-app || true
                 docker run -d \
                   --name student-app \
-                  -p 8080:8080 \
+                  -p 8083:8080 \
                   ${ECR_URI}:${IMAGE_TAG}
                 '''
             }
