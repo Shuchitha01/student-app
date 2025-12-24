@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // JFrog
-        JFROG_URL  = "http://65.1.146.55:8082/artifactory"
+        JFROG_URL  = "http://13.200.200.175:8082/artifactory"
         JFROG_REPO = "libs-snapshot-local"
 
         // AWS / ECR
