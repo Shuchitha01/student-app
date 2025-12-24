@@ -58,20 +58,21 @@ pipeline {
         }
 
         /* -------------------- 5. LOGIN TO AWS ECR -------------------- */
-        stage('Login to AWS ECR') {
-            steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'aws-ecr-creds',
-                    usernameVariable: 'AWS_ACCESS_KEY_ID',
-                    passwordVariable: 'AWS_SECRET_ACCESS_KEY'
-                )]) {
-                    sh '''
-                    aws ecr get-login-password --region $AWS_REGION \
-                    | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
-                    '''
-                }
-            }
+  stage('Login to AWS ECR') {
+    steps {
+        withCredentials([[
+            $class: 'AmazonWebServicesCredentialsBinding',
+            credentialsId: 'aws-ecr-creds'
+        ]]) {
+            sh '''
+              aws sts get-caller-identity
+              aws ecr get-login-password --region ap-south-1 \
+              | docker login --username AWS --password-stdin 581807542961.dkr.ecr.ap-south-1.amazonaws.com
+            '''
         }
+    }
+}
+
 
         /* -------------------- 6. PUSH IMAGE TO ECR -------------------- */
         stage('Push Image to ECR') {
